@@ -13,6 +13,6 @@ Staff bagian umum: menambahkan proyektor
 Pencarian data berdasarkan kode proyektor
 
 KELOMPOK :
-NIA NABILLA
-REZKI RAHMAT ALFI
-SYUKRI IHSAN
+1. NIA NABILLA
+2. REZKI RAHMAT ALFI
+3. SYUKRI IHSAN
