@@ -11,8 +11,8 @@ Melihat daftar infokus yang dipakai atau rusak
 Staff bagian umum: peminjaman proyektor (input data peminjam, proyektor, dll)
 Staff bagian umum: menambahkan proyektor
 Pencarian data berdasarkan kode proyektor
-KELOMPOK :
 
+KELOMPOK :
 NIA NABILLA
 REZKI RAHMAT ALFI
 SYUKRI IHSAN
