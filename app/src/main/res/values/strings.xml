@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">proyektorapp</string>
+    <string-array name="status_array_home">
+        <item>Semua</item>
+        <item>Tersedia</item>
+        <item>Sedang Dipinjam</item>
+        <item>Rusak</item>
+    </string-array>
+
+    <string-array name="status_array_transaksi">
+        <item>Semua</item>
+        <item>Belum Dikembalikan</item>
+        <item>Sudah Dikembalikan</item>
+    </string-array>
+
+</resources>

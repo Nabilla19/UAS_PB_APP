@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8F5E9"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Back -->
+        <ImageView
+            android:id="@+id/btnBackToHome"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_menu_revert"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Kembali"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp"
+            app:tint="#2E7D32" />
+
+        <!-- Judul -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daftar Penanggung Jawab"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Form (inline, awalnya hidden) -->
+        <LinearLayout
+            android:id="@+id/formLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/inputNamaPJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/inputNIKPJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="NIK"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/inputNoHPPJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="No. HP"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btnSubmitPJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simpan"
+                android:backgroundTint="#4CAF50"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <!-- Tambah -->
+        <Button
+            android:id="@+id/btnTambahPJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tambah Penanggung Jawab"
+            android:textStyle="bold"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- List -->
+        <LinearLayout
+            android:id="@+id/containerPJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </LinearLayout>
+</ScrollView>

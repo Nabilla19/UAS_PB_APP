@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/etKodeInfokus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kode Infokus" />
+
+    <EditText
+        android:id="@+id/etKodeTransaksi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kode Transaksi" />
+
+    <EditText
+        android:id="@+id/etNIK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NIK" />
+
+    <Spinner
+        android:id="@+id/spinnerStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
