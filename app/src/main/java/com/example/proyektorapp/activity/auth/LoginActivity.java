@@ -1,4 +1,4 @@
-package com.example.proyektorapp;
+package com.example.proyektorapp.activity.auth;
 
 import android.content.Intent;
 import android.os.Build;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.proyektorapp.R;
+import com.example.proyektorapp.activity.nav.DashboardActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

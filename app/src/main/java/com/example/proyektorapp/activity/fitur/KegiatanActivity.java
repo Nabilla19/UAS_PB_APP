@@ -1,10 +1,12 @@
-package com.example.proyektorapp;
+package com.example.proyektorapp.activity.fitur;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.proyektorapp.R;
 
 public class KegiatanActivity extends AppCompatActivity {
 
@@ -23,7 +25,7 @@ public class KegiatanActivity extends AppCompatActivity {
         container  = findViewById(R.id.containerKegiatan);
         btnTambah  = findViewById(R.id.btnTambahKegiatan);
         btnSimpan  = findViewById(R.id.btnSubmitKegiatan);
-        etKode     = findViewById(R.id.inputKodeKegiatan);
+        etKode     = findViewById(R.id.inputKodePeminjaman);
         etNama     = findViewById(R.id.inputNamaKegiatan);
         etTempat   = findViewById(R.id.inputTempatKegiatan);
         etWaktu    = findViewById(R.id.inputWaktuKegiatan);
@@ -66,7 +68,7 @@ public class KegiatanActivity extends AppCompatActivity {
         View item = LayoutInflater.from(this)
                 .inflate(R.layout.item_kegiatan, container, false);
 
-        TextView tvKode   = item.findViewById(R.id.tvKodeKegiatan);
+        TextView tvKode   = item.findViewById(R.id.tvKodePeminjaman);
         TextView tvNama   = item.findViewById(R.id.tvNamaKegiatan);
         TextView tvTempat = item.findViewById(R.id.tvTempatKegiatan);
         TextView tvWaktu  = item.findViewById(R.id.tvWaktuKegiatan);

@@ -14,28 +14,28 @@
         android:theme="@style/Theme.Proyektorapp"
         tools:targetApi="31">
         <activity
-            android:name=".ProfileFragment"
+            android:name=".fragment.ProfileFragment"
             android:exported="false" />
         <activity
-            android:name=".HistoryFragment"
+            android:name=".fragment.HistoryFragment"
             android:exported="false" />
         <activity
-            android:name=".KegiatanActivity"
+            android:name=".activity.fitur.KegiatanActivity"
             android:exported="false" />
         <activity
-            android:name=".PenanggungJawabActivity"
+            android:name=".activity.fitur.PenanggungJawabActivity"
             android:exported="false" />
         <activity
-            android:name=".TransaksiActivity"
+            android:name=".activity.fitur.PeminjamanActivity"
             android:exported="false" />
         <activity
-            android:name=".ProyektorActivity"
+            android:name=".activity.fitur.ProyektorActivity"
             android:exported="false" />
         <activity
-            android:name=".DashboardActivity"
+            android:name=".activity.nav.DashboardActivity"
             android:exported="false" /> <!-- Activity Login (jadi LAUNCHER) -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity> <!-- Activity Sign In -->
         <activity
-            android:name=".SignInActivity"
+            android:name=".activity.auth.SignInActivity"
             android:exported="true" />
     </application>
 

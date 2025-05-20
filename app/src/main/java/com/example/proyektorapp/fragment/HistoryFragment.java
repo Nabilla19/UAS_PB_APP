@@ -1,4 +1,4 @@
-package com.example.proyektorapp;
+package com.example.proyektorapp.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.proyektorapp.navcol.BottomNavColorProvider;
+import com.example.proyektorapp.R;
 
 public class HistoryFragment extends Fragment implements BottomNavColorProvider {
 
@@ -30,7 +33,7 @@ public class HistoryFragment extends Fragment implements BottomNavColorProvider 
         return view;
     }
 
-    private void addHistoryItem(String kodeTransaksi, String kodeProyektor, String nik, String status) {
+    private void addHistoryItem(String kodePeminjaman, String kodeProyektor, String nik, String status) {
         LinearLayout card = new LinearLayout(requireContext());
         card.setOrientation(LinearLayout.VERTICAL);
         card.setPadding(24, 24, 24, 24);
@@ -42,7 +45,7 @@ public class HistoryFragment extends Fragment implements BottomNavColorProvider 
         card.setLayoutParams(params);
 
         TextView tvKode = new TextView(requireContext());
-        tvKode.setText("Kode Transaksi: " + kodeTransaksi);
+        tvKode.setText("Kode Peminjaman: " + kodePeminjaman);
         tvKode.setTextColor(getResources().getColor(R.color.green_dark));
         tvKode.setTextSize(16);
         card.addView(tvKode);

@@ -12,10 +12,10 @@
     android:layout_marginHorizontal="4dp">
 
     <TextView
-        android:id="@+id/tvKodeTransaksi"
+        android:id="@+id/tvKodePeminjaman"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kode Transaksi: "
+        android:text="Kode Peminjaman: "
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="#2E7D32" />

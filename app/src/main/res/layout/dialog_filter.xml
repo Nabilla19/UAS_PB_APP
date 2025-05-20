@@ -12,10 +12,10 @@
         android:hint="Kode Infokus" />
 
     <EditText
-        android:id="@+id/etKodeTransaksi"
+        android:id="@+id/etKodePeminjaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Kode Transaksi" />
+        android:hint="Kode Peminjaman" />
 
     <EditText
         android:id="@+id/etNIK"

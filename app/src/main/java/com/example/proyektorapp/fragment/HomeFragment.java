@@ -1,4 +1,4 @@
-package com.example.proyektorapp;
+package com.example.proyektorapp.fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -15,9 +15,16 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.proyektorapp.activity.fitur.PeminjamanActivity;
+import com.example.proyektorapp.navcol.BottomNavColorProvider;
+import com.example.proyektorapp.activity.fitur.KegiatanActivity;
+import com.example.proyektorapp.activity.fitur.PenanggungJawabActivity;
+import com.example.proyektorapp.activity.fitur.ProyektorActivity;
+import com.example.proyektorapp.R;
+
 public class HomeFragment extends Fragment implements BottomNavColorProvider {
 
-    private LinearLayout btnProyektor, btnTransaksi, btnPenanggungJawab, btnKegiatan;
+    private LinearLayout btnProyektor, btnPeminjaman, btnPenanggungJawab, btnKegiatan;
     private ImageView ethotdog, itsearch;
     private EditText etsearch;
 
@@ -32,7 +39,7 @@ public class HomeFragment extends Fragment implements BottomNavColorProvider {
 
         // Initialize views
         btnProyektor = view.findViewById(R.id.btnProyektor);
-        btnTransaksi = view.findViewById(R.id.btnTransaksi);
+        btnPeminjaman = view.findViewById(R.id.btnPeminjaman);
         btnPenanggungJawab = view.findViewById(R.id.btnPenanggungJawab);
         btnKegiatan = view.findViewById(R.id.btnKegiatan);
         ethotdog = view.findViewById(R.id.ethotdog);
@@ -43,8 +50,8 @@ public class HomeFragment extends Fragment implements BottomNavColorProvider {
         btnProyektor.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), ProyektorActivity.class)));
 
-        btnTransaksi.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TransaksiActivity.class)));
+        btnPeminjaman.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), PeminjamanActivity.class)));
 
         btnPenanggungJawab.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), PenanggungJawabActivity.class)));
@@ -65,7 +72,7 @@ public class HomeFragment extends Fragment implements BottomNavColorProvider {
         View dialogView = inflater.inflate(R.layout.dialog_filter, null);
 
         EditText etKodeInfokus = dialogView.findViewById(R.id.etKodeInfokus);
-        EditText etKodeTransaksi = dialogView.findViewById(R.id.etKodeTransaksi);
+        EditText etKodePeminjaman = dialogView.findViewById(R.id.etKodePeminjaman);
         EditText etNIK = dialogView.findViewById(R.id.etNIK);
         Spinner spinnerStatus = dialogView.findViewById(R.id.spinnerStatus);
 
@@ -81,14 +88,14 @@ public class HomeFragment extends Fragment implements BottomNavColorProvider {
                 .setView(dialogView)
                 .setPositiveButton("Terapkan", (dialog, which) -> {
                     String kodeInfokus = etKodeInfokus.getText().toString().trim();
-                    String kodeTransaksi = etKodeTransaksi.getText().toString().trim();
+                    String kodePeminjaman = etKodePeminjaman.getText().toString().trim();
                     String nik = etNIK.getText().toString().trim();
                     String status = spinnerStatus.getSelectedItem().toString();
 
-                    // Send filter data to TransaksiActivity via Intent
-                    Intent intent = new Intent(getActivity(), TransaksiActivity.class);
+                    // Send filter data to PeminjamanActivity via Intent
+                    Intent intent = new Intent(getActivity(), PeminjamanActivity.class);
                     intent.putExtra("filter_kodeInfokus", kodeInfokus);
-                    intent.putExtra("filter_kodeTransaksi", kodeTransaksi);
+                    intent.putExtra("filter_kodePeminjaman", kodePeminjaman);
                     intent.putExtra("filter_nik", nik);
                     intent.putExtra("filter_status", status);
                     startActivity(intent);

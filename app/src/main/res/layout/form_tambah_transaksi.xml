@@ -10,20 +10,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Kode Transaksi -->
+        <!-- Kode Peminjaman -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kode Transaksi"
+            android:text="Kode Peminjaman"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
         <EditText
-            android:id="@+id/etKodeTransaksi"
+            android:id="@+id/etKodePeminjaman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Masukkan Kode Transaksi"
+            android:hint="Masukkan Kode Peminjaman"
             android:inputType="text"
             android:background="@android:drawable/edit_text"
             android:padding="12dp"

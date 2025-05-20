@@ -1,4 +1,4 @@
-package com.example.proyektorapp;
+package com.example.proyektorapp.activity.fitur;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,29 +8,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.proyektorapp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransaksiActivity extends AppCompatActivity {
+public class PeminjamanActivity extends AppCompatActivity {
 
     private ImageView btnBackToHome;
-    private LinearLayout formLayout, containerTransaksi;
-    private Button btnTambahTransaksi, btnSubmitTransaksi;
-    private EditText inputKodeTransaksi, inputKodeProyektor, inputNIK;
+    private LinearLayout formLayout, containerPeminjaman;
+    private Button btnTambahPeminjaman, btnSubmitPeminjaman;
+    private EditText inputKodePeminjaman, inputKodeProyektor, inputNIK;
     private Spinner inputStatus;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaksi);
+        setContentView(R.layout.activity_peminjaman);
 
         btnBackToHome        = findViewById(R.id.btnBackToHome);
         formLayout           = findViewById(R.id.formLayout);
-        containerTransaksi   = findViewById(R.id.containerTransaksi);
-        btnTambahTransaksi   = findViewById(R.id.btnTambahTransaksi);
-        btnSubmitTransaksi   = findViewById(R.id.btnSubmitTransaksi);
-        inputKodeTransaksi   = findViewById(R.id.inputKodeTransaksi);
+        containerPeminjaman   = findViewById(R.id.containerPeminjaman);
+        btnTambahPeminjaman   = findViewById(R.id.btnTambahPeminjaman);
+        btnSubmitPeminjaman   = findViewById(R.id.btnSubmitPeminjaman);
+        inputKodePeminjaman   = findViewById(R.id.inputKodePeminjaman);
         inputKodeProyektor   = findViewById(R.id.inputKodeProyektor);
         inputNIK             = findViewById(R.id.inputNIK);
         inputStatus          = findViewById(R.id.inputStatus);
@@ -45,7 +48,7 @@ public class TransaksiActivity extends AppCompatActivity {
 
         btnBackToHome.setOnClickListener(v -> finish());
 
-        // Contoh data transaksi (bisa kamu ganti dengan data asli)
+        // Contoh data Peminjaman (bisa kamu ganti dengan data asli)
         String[][] data = {
                 {"TX001", "PJ001", "1234567890", "Sudah dikembalikan"},
                 {"TX002", "PJ002", "9876543210", "Belum dikembalikan"},
@@ -87,18 +90,18 @@ public class TransaksiActivity extends AppCompatActivity {
             }
         }
 
-        // Hapus dulu semua transaksi lama (jika ada)
-        containerTransaksi.removeAllViews();
+        // Hapus dulu semua Peminjaman lama (jika ada)
+        containerPeminjaman.removeAllViews();
 
-        // Tampilkan transaksi hasil filter
+        // Tampilkan Peminjaman hasil filter
         for (String[] d : filteredList) {
-            addTransaksiItem(d[0], d[1], d[2], d[3]);
+            addPeminjamanItem(d[0], d[1], d[2], d[3]);
         }
 
-        btnTambahTransaksi.setOnClickListener(v -> formLayout.setVisibility(View.VISIBLE));
+        btnTambahPeminjaman.setOnClickListener(v -> formLayout.setVisibility(View.VISIBLE));
 
-        btnSubmitTransaksi.setOnClickListener(v -> {
-            String kode  = inputKodeTransaksi.getText().toString().trim();
+        btnSubmitPeminjaman.setOnClickListener(v -> {
+            String kode  = inputKodePeminjaman.getText().toString().trim();
             String proy  = inputKodeProyektor.getText().toString().trim();
             String nikInput   = inputNIK.getText().toString().trim();
             String stat  = inputStatus.getSelectedItem().toString();
@@ -108,9 +111,9 @@ public class TransaksiActivity extends AppCompatActivity {
                 return;
             }
 
-            addTransaksiItem(kode, proy, nikInput, stat);
+            addPeminjamanItem(kode, proy, nikInput, stat);
 
-            inputKodeTransaksi.setText("");
+            inputKodePeminjaman.setText("");
             inputKodeProyektor.setText("");
             inputNIK.setText("");
             inputStatus.setSelection(0);
@@ -118,16 +121,16 @@ public class TransaksiActivity extends AppCompatActivity {
         });
     }
 
-    private void addTransaksiItem(String kode, String proyektor, String nik, String status) {
+    private void addPeminjamanItem(String kode, String proyektor, String nik, String status) {
         View item = LayoutInflater.from(this)
-                .inflate(R.layout.item_transaksi, containerTransaksi, false);
+                .inflate(R.layout.item_peminjaman, containerPeminjaman, false);
 
-        TextView tvKode = item.findViewById(R.id.tvKodeTransaksi);
+        TextView tvKode = item.findViewById(R.id.tvKodePeminjaman);
         TextView tvProy = item.findViewById(R.id.tvKodeProyektor);
         TextView tvNIK  = item.findViewById(R.id.tvNIK);
         TextView tvStat = item.findViewById(R.id.tvStatus);
 
-        tvKode.setText("Kode Transaksi: " + kode);
+        tvKode.setText("Kode Peminjaman: " + kode);
         tvProy.setText("Kode Proyektor: " + proyektor);
         tvNIK.setText("NIK: " + nik);
         tvStat.setText("Status: " + status);
@@ -136,6 +139,6 @@ public class TransaksiActivity extends AppCompatActivity {
                 "Sudah dikembalikan".equalsIgnoreCase(status) ? "#388E3C" : "#FBC02D"
         ));
 
-        containerTransaksi.addView(item);
+        containerPeminjaman.addView(item);
     }
 }

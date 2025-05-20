@@ -26,7 +26,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Daftar Transaksi"
+            android:text="Daftar Peminjaman"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#2E7D32"
@@ -41,10 +41,10 @@
             android:layout_marginBottom="24dp">
 
             <EditText
-                android:id="@+id/inputKodeTransaksi"
+                android:id="@+id/inputKodePeminjaman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Kode Transaksi"
+                android:hint="Kode Peminjaman"
                 android:layout_marginBottom="8dp"/>
 
             <EditText
@@ -68,7 +68,7 @@
                 android:layout_marginBottom="8dp"/>
 
             <Button
-                android:id="@+id/btnSubmitTransaksi"
+                android:id="@+id/btnSubmitPeminjaman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Simpan"
@@ -77,10 +77,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnTambahTransaksi"
+            android:id="@+id/btnTambahPeminjaman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tambah Transaksi"
+            android:text="Tambah Peminjaman"
             android:textStyle="bold"
             android:backgroundTint="#4CAF50"
             android:textColor="#FFFFFF"
@@ -88,7 +88,7 @@
             android:layout_marginBottom="24dp"/>
 
         <LinearLayout
-            android:id="@+id/containerTransaksi"
+            android:id="@+id/containerPeminjaman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"/>

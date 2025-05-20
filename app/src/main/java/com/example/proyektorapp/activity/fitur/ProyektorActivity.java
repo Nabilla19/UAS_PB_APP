@@ -1,10 +1,12 @@
-package com.example.proyektorapp;
+package com.example.proyektorapp.activity.fitur;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.proyektorapp.R;
 
 public class ProyektorActivity extends AppCompatActivity {
 

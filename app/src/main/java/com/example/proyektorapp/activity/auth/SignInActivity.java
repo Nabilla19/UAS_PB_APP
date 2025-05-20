@@ -1,4 +1,4 @@
-package com.example.proyektorapp;
+package com.example.proyektorapp.activity.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.proyektorapp.R;
 
 public class SignInActivity extends AppCompatActivity {
 
