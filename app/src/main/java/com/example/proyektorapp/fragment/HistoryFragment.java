@@ -6,16 +6,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.proyektorapp.navcol.BottomNavColorProvider;
 import com.example.proyektorapp.R;
+import com.example.proyektorapp.api.ApiClient;
+import com.example.proyektorapp.api.service.RiwayatService;
+import com.example.proyektorapp.helper.SharedPrefsHelper;
+import com.example.proyektorapp.model.modelfitur.Riwayat;
 
-public class HistoryFragment extends Fragment implements BottomNavColorProvider {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class HistoryFragment extends Fragment {
 
     private LinearLayout containerHistory;
+    private RiwayatService riwayatService;
+    private String token;
 
     @Nullable
     @Override
@@ -23,59 +40,74 @@ public class HistoryFragment extends Fragment implements BottomNavColorProvider 
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
-
         containerHistory = view.findViewById(R.id.containerHistory);
 
-        // Contoh data riwayat transaksi
-        addHistoryItem("TRX001", "PRJ001", "1234567890", "Selesai");
-        addHistoryItem("TRX002", "PRJ002", "9876543210", "Selesai");
+        SharedPrefsHelper prefsHelper = new SharedPrefsHelper(requireContext());
+        token = "Bearer " + prefsHelper.getToken();
 
+        riwayatService = ApiClient.getClient().create(RiwayatService.class);
+        loadRiwayat();
         return view;
     }
 
-    private void addHistoryItem(String kodePeminjaman, String kodeProyektor, String nik, String status) {
-        LinearLayout card = new LinearLayout(requireContext());
-        card.setOrientation(LinearLayout.VERTICAL);
-        card.setPadding(24, 24, 24, 24);
-        card.setBackgroundResource(R.drawable.bg_history_card);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 0, 0, 24);
-        card.setLayoutParams(params);
+    private void loadRiwayat() {
+        containerHistory.removeAllViews();
 
-        TextView tvKode = new TextView(requireContext());
-        tvKode.setText("Kode Peminjaman: " + kodePeminjaman);
-        tvKode.setTextColor(getResources().getColor(R.color.green_dark));
-        tvKode.setTextSize(16);
-        card.addView(tvKode);
+        riwayatService.getAllRiwayat(token).enqueue(new Callback<List<Riwayat>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Riwayat>> call, @NonNull Response<List<Riwayat>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    for (Riwayat item : response.body()) {
+                        addHistoryItem(item);
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Gagal memuat data", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        TextView tvProyektor = new TextView(requireContext());
-        tvProyektor.setText("Kode Proyektor: " + kodeProyektor);
-        tvProyektor.setTextColor(getResources().getColor(R.color.green_dark));
-        tvProyektor.setTextSize(16);
-        card.addView(tvProyektor);
-
-        TextView tvNIK = new TextView(requireContext());
-        tvNIK.setText("NIK: " + nik);
-        tvNIK.setTextColor(getResources().getColor(R.color.green_dark));
-        tvNIK.setTextSize(16);
-        card.addView(tvNIK);
-
-        TextView tvStatus = new TextView(requireContext());
-        tvStatus.setText("Status: " + status);
-        tvStatus.setTextColor(getResources().getColor(R.color.green_success));
-        tvStatus.setTextSize(16);
-        tvStatus.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
-        tvStatus.setPadding(0, 16, 0, 0);
-        card.addView(tvStatus);
-
-        containerHistory.addView(card);
+            @Override
+            public void onFailure(@NonNull Call<List<Riwayat>> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @Override
-    public int getBottomNavColor() {
-        // Contoh warna biru muda (ubah sesuai colors.xml)
-        return getResources().getColor(R.color.colorHistoryBackground);
+    private void addHistoryItem(Riwayat p) {
+        View itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_riwayat, containerHistory, false);
+
+        TextView tvKode = itemView.findViewById(R.id.tvKodeRiwayat);
+        TextView tvNama = itemView.findViewById(R.id.tvNamaRiwayat);
+        TextView tvProyektor = itemView.findViewById(R.id.tvProyektorRiwayat);
+        TextView tvStatus = itemView.findViewById(R.id.tvStatusRiwayat);
+        TextView tvKembali = itemView.findViewById(R.id.tvWaktuKembaliRiwayat);
+
+        tvKode.setText("Kode: " + p.getKode_transaksi());
+        tvNama.setText("Nama: " + (p.getNama() != null ? p.getNama() : "-"));
+        tvProyektor.setText("Proyektor: " + p.getKode_proyektor());
+        tvStatus.setText("Kegiatan: " + (p.getKegiatan() != null ? p.getKegiatan() : "-"));
+
+        String waktuKembali = p.getWaktu_dikembalikan();
+        if (waktuKembali != null && !waktuKembali.isEmpty() && !waktuKembali.equals("null")) {
+            String formatted = formatTimestampForDisplay(waktuKembali);
+            tvKembali.setText("Dikembalikan: " + formatted);
+        } else {
+            tvKembali.setText("Belum dikembalikan");
+        }
+
+        containerHistory.addView(itemView);
+    }
+
+    private String formatTimestampForDisplay(String waktu) {
+        try {
+            // Contoh format input waktu backend: "2025-05-24T13:45:00.000Z"
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+            Date date = inputFormat.parse(waktu);
+
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy HH:mm", new Locale("id", "ID"));
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return waktu; // fallback tampilkan apa adanya
+        }
     }
 }

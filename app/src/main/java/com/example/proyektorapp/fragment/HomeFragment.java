@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment implements BottomNavColorProvider {
         Spinner spinnerStatus = dialogView.findViewById(R.id.spinnerStatus);
 
         // Setup spinner options
-        String[] statusOptions = {"Semua", "Tersedia", "Sedang Dipinjam", "Rusak"};
+        String[] statusOptions = {"belum dikembalikan", "sudah dikembalikan"};
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, statusOptions);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

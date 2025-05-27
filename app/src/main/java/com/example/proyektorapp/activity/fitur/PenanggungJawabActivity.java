@@ -1,116 +1,212 @@
 package com.example.proyektorapp.activity.fitur;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import com.example.proyektorapp.api.service.PJService;
+import com.example.proyektorapp.model.modelfitur.PJ;
+import com.example.proyektorapp.api.ApiClient;
 import com.example.proyektorapp.R;
+import com.example.proyektorapp.helper.SharedPrefsHelper;
 
 public class PenanggungJawabActivity extends AppCompatActivity {
 
     private ImageView btnBackToHome;
     private LinearLayout formLayout, containerPJ;
     private Button btnTambahPJ, btnSubmitPJ;
-    private EditText inputNama, inputNIK, inputNoHP;
+    private EditText inputNIK, inputNama,inputNoHP;
+    private PJService pjservice;
+    private String token;
+    private boolean isAdmin = true;
+    private String kodeYangDiedit = null;
 
-    private View itemBeingEdited = null; // View yang sedang diedit
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_penanggung_jawab);
 
+
+        SharedPrefsHelper prefsHelper = new SharedPrefsHelper(this);
+        token = "Bearer " + prefsHelper.getToken();
+
+        String userRole = prefsHelper.getRole();
+        isAdmin = userRole != null && userRole.equalsIgnoreCase("ADMIN");
+
+
         btnBackToHome = findViewById(R.id.btnBackToHome);
-        formLayout    = findViewById(R.id.formLayout);
-        containerPJ   = findViewById(R.id.containerPJ);
-        btnTambahPJ   = findViewById(R.id.btnTambahPJ);
-        btnSubmitPJ   = findViewById(R.id.btnSubmitPJ);
-        inputNama     = findViewById(R.id.inputNamaPJ);
-        inputNIK      = findViewById(R.id.inputNIKPJ);
-        inputNoHP     = findViewById(R.id.inputNoHPPJ);
+        formLayout = findViewById(R.id.formLayout);
+        containerPJ = findViewById(R.id.containerPJ);
+        btnTambahPJ = findViewById(R.id.btnTambahPJ);
+        btnSubmitPJ = findViewById(R.id.btnSubmitPJ);
+        inputNama = findViewById(R.id.inputNamaPJ);
+        inputNIK = findViewById(R.id.inputNIKPJ);
+        inputNoHP = findViewById(R.id.inputNoHPPJ);
 
         btnBackToHome.setOnClickListener(v -> finish());
 
-        String[][] dataPJ = {
-                {"Andi Saputra", "1234567890", "081234567890"},
-                {"Rina Lestari", "9876543210", "085612345678"}
-        };
-        for (String[] pj : dataPJ) {
-            addPJItem(pj[0], pj[1], pj[2]);
+
+        pjservice = ApiClient.getClient().create(PJService.class);
+
+        if (!isAdmin) {
+            btnTambahPJ.setVisibility(View.GONE);
+            formLayout.setVisibility(View.GONE);
         }
 
         btnTambahPJ.setOnClickListener(v -> {
+            resetForm();
+            kodeYangDiedit = null;
             formLayout.setVisibility(View.VISIBLE);
-            itemBeingEdited = null; // mode tambah, bukan edit
-            inputNama.setText("");
-            inputNIK.setText("");
-            inputNoHP.setText("");
         });
 
         btnSubmitPJ.setOnClickListener(v -> {
+            String nik = inputNIK.getText().toString().trim();
             String nama = inputNama.getText().toString().trim();
-            String nik  = inputNIK.getText().toString().trim();
-            String hp   = inputNoHP.getText().toString().trim();
-
-            if (nama.isEmpty() || nik.isEmpty() || hp.isEmpty()) {
-                Toast.makeText(this, "Semua kolom wajib diisi", Toast.LENGTH_SHORT).show();
+            String nohp = inputNoHP.getText().toString().trim();
+            if (nik.isEmpty() || nama.isEmpty() || nohp.isEmpty()) {
+                Toast.makeText(this, "Mohon lengkapi semua data!", Toast.LENGTH_SHORT).show();
                 return;
             }
+            PJ pj = new PJ(nik, nama, nohp);
 
-            if (itemBeingEdited != null) {
-                // mode edit: update isi dari item
-                TextView tvNama = itemBeingEdited.findViewById(R.id.tvNamaPJ);
-                TextView tvNIK  = itemBeingEdited.findViewById(R.id.tvNIKPJ);
-                TextView tvHP   = itemBeingEdited.findViewById(R.id.tvNoHP);
+            if (kodeYangDiedit == null) {
+                pjservice.addPJ(token, pj).enqueue(new Callback<PJ>() {
+                    @Override
+                    public void onResponse(Call<PJ> call, Response<PJ> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(PenanggungJawabActivity.this, "Berhasil ditambah", Toast.LENGTH_SHORT).show();
+                            resetForm();
+                            formLayout.setVisibility(View.GONE);
+                            kodeYangDiedit = null;
+                            loadPjList();
+                        } else {
+                            // Server merespon error, misal 400, 401, 500
+                            String errorMsg = "Gagal Menambah: " + response.code() + " " + response.message();
+                            Toast.makeText(PenanggungJawabActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                        }
+                    }
 
-                tvNama.setText("Nama: " + nama);
-                tvNIK.setText("NIK: " + nik);
-                tvHP.setText("No. HP: " + hp);
-
-                Toast.makeText(this, "Data diperbarui", Toast.LENGTH_SHORT).show();
-                itemBeingEdited = null;
+                    @Override
+                    public void onFailure(Call<PJ> call, Throwable t) {
+                        Log.e("TAMBAH_PJ", "Gagal menambah Penanggung Jawab", t);
+                        Toast.makeText(PenanggungJawabActivity.this, "Gagal tambah", Toast.LENGTH_SHORT).show();
+                    }
+                });
             } else {
-                // mode tambah
-                addPJItem(nama, nik, hp);
+                // Edit PJ
+                pjservice.updatePJ(token, kodeYangDiedit, pj).enqueue(new Callback<PJ>() {
+                    @Override
+                    public void onResponse(Call<PJ> call, Response<PJ> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(PenanggungJawabActivity.this, "Berhasil diupdate", Toast.LENGTH_SHORT).show();
+                            resetForm();
+                            formLayout.setVisibility(View.GONE);
+                            kodeYangDiedit = null;
+                            loadPjList();
+                        } else {
+                            // Server merespon error, misal 400, 401, 500
+                            String errorMsg = "Gagal update: " + response.code() + " " + response.message();
+                            Toast.makeText(PenanggungJawabActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PJ> call, Throwable t) {
+                        Log.e("UPDATE_PROYEKTOR", "Gagal update proyektor", t);
+                        Toast.makeText(PenanggungJawabActivity.this, "Gagal update", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        loadPjList();
+        Log.d("PenanggungJawabActivity", "Token: " + token);
+
+    }
+    private void loadPjList() {
+        containerPJ.removeAllViews();
+
+        pjservice.getAllPJ(token).enqueue(new Callback<List<PJ>>() {
+            @Override
+            public void onResponse(Call<List<PJ>> call, Response<List<PJ>> response) {
+                if (response.isSuccessful()) {
+                    for (PJ p : response.body()) {
+                        addPJview(p);
+                    }
+                } else {
+                    Toast.makeText(PenanggungJawabActivity.this, "Gagal ambil data", Toast.LENGTH_SHORT).show();
+                }
             }
 
-            inputNama.setText("");
-            inputNIK.setText("");
-            inputNoHP.setText("");
-            formLayout.setVisibility(View.GONE);
+            @Override
+            public void onFailure(Call<List<PJ>> call, Throwable t) {
+                Log.e("AMBIL_PROYEKTOR", "Gagal mengambil proyektor", t);
+                Toast.makeText(PenanggungJawabActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
-    private void addPJItem(String nama, String nik, String hp) {
-        View item = LayoutInflater.from(this)
-                .inflate(R.layout.item_penanggung_jawab, containerPJ, false);
+    private void addPJview(PJ p) {
+        View itemView = LayoutInflater.from(this).inflate(R.layout.item_penanggung_jawab, containerPJ, false);
 
-        TextView tvNama = item.findViewById(R.id.tvNamaPJ);
-        TextView tvNIK  = item.findViewById(R.id.tvNIKPJ);
-        TextView tvHP   = item.findViewById(R.id.tvNoHP);
+        TextView tvnik = itemView.findViewById(R.id.tvNIKPJ);
+        TextView tvnamaPJ = itemView.findViewById(R.id.tvNamaPJ);
+        TextView tvNoHP = itemView.findViewById(R.id.tvNoHP);
+        Button btnEdit = itemView.findViewById(R.id.btnEdit);
+        Button btnDelete = itemView.findViewById(R.id.btnDelete);
 
-        Button btnEdit   = item.findViewById(R.id.btnEdit);
-        Button btnDelete = item.findViewById(R.id.btnDelete);
+        tvnik.setText("Kode: " + p.getnik());
+        tvnamaPJ.setText("Merek: " + p.getnama());
+        tvNoHP.setText("No Seri: " + p.getNo_hp());
 
-        tvNama.setText("Nama: " + nama);
-        tvNIK.setText("NIK: " + nik);
-        tvHP.setText("No. HP: " + hp);
 
-        btnDelete.setOnClickListener(v -> {
-            containerPJ.removeView(item);
-            Toast.makeText(this, "Data dihapus", Toast.LENGTH_SHORT).show();
-        });
+        if (isAdmin) {
+            btnEdit.setVisibility(View.VISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
 
-        btnEdit.setOnClickListener(v -> {
-            inputNama.setText(nama);
-            inputNIK.setText(nik);
-            inputNoHP.setText(hp);
-            formLayout.setVisibility(View.VISIBLE);
-            itemBeingEdited = item; // simpan item yang sedang diedit
-        });
+            btnEdit.setOnClickListener(v -> {
+                kodeYangDiedit = p.getnik();
+                inputNIK.setText(p.getnik());
+                inputNama.setText(p.getnama());
+                inputNoHP.setText(p.getNo_hp());
+                formLayout.setVisibility(View.VISIBLE);
+            });
 
-        containerPJ.addView(item);
+            btnDelete.setOnClickListener(v -> {
+                pjservice.deletePJ(token, p.getnik()).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(PenanggungJawabActivity.this, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+                        loadPjList();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.e("DELETE_PROYEKTOR", "Gagal hapus proyektor", t);
+                        Toast.makeText(PenanggungJawabActivity.this, "Gagal hapus", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            });
+
+        } else {
+            btnEdit.setVisibility(View.GONE);
+            btnDelete.setVisibility(View.GONE);
+        }
+
+        containerPJ.addView(itemView);
+    }
+
+    private void resetForm() {
+        inputNIK.setText("");
+        inputNama.setText("");
+        inputNoHP.setText("");
+        kodeYangDiedit = null;
     }
 }

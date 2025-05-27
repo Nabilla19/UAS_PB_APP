@@ -2,27 +2,25 @@ package com.example.proyektorapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.proyektorapp.navcol.BottomNavColorProvider;
-import com.example.proyektorapp.activity.auth.LoginActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import com.example.proyektorapp.helper.SharedPrefsHelper;
+
 import com.example.proyektorapp.R;
+import com.example.proyektorapp.activity.auth.LoginActivity;
+import com.example.proyektorapp.navcol.BottomNavColorProvider;
 
 public class ProfileFragment extends Fragment implements BottomNavColorProvider {
 
     private TextView tvNama, tvEmail;
     private Button btnLogout;
-
-    // Dummy user data
-    private String namaUser = "Andi Saputra";
-    private String emailUser = "andi.saputra@example.com";
 
     @Nullable
     @Override
@@ -34,10 +32,13 @@ public class ProfileFragment extends Fragment implements BottomNavColorProvider 
         tvEmail = view.findViewById(R.id.tvEmail);
         btnLogout = view.findViewById(R.id.btnLogout);
 
-        tvNama.setText(namaUser);
-        tvEmail.setText(emailUser);
+        // Ambil data dari SharedPreferences
+        SharedPrefsHelper prefs = new SharedPrefsHelper(requireContext());
+        tvNama.setText(prefs.getName());
+        tvEmail.setText(prefs.getEmail());
 
         btnLogout.setOnClickListener(v -> {
+            prefs.clear(); // Hapus semua data
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -48,7 +49,6 @@ public class ProfileFragment extends Fragment implements BottomNavColorProvider 
 
     @Override
     public int getBottomNavColor() {
-        // Contoh warna hijau tua (ubah sesuai colors.xml)
         return getResources().getColor(R.color.colorProfileBackground);
     }
 }
