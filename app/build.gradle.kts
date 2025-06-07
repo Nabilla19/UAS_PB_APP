@@ -37,9 +37,16 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation ("androidx.cardview:cardview:1.0.0")
-    implementation ("com.google.android.material:material:1.12.0")
+    implementation (libs.cardview)
+    implementation (libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.okhttp)
+
+
+
+
 }

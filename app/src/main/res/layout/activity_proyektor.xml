@@ -11,18 +11,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <ImageView
             android:id="@+id/btnBackToHome"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/ic_menu_revert"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Kembali"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginBottom="16dp"
-            android:padding="8dp"
-            app:tint="#2E7D32" />
+            android:padding="12dp"
+            app:tint="#2E7D32"
+            android:layout_marginBottom="16dp" />
+
 
         <TextView
             android:id="@+id/tvTitle"
