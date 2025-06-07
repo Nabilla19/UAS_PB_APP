@@ -21,16 +21,16 @@
        >
 
         <activity
-            android:name=".activity.fitur.KegiatanActivity"
+            android:name=".activity.fitur.kegiatan.KegiatanActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.fitur.PenanggungJawabActivity"
+            android:name=".activity.fitur.pj.PenanggungJawabActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.fitur.PeminjamanActivity"
+            android:name=".activity.fitur.peminjaman.PeminjamanActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.fitur.ProyektorActivity"
+            android:name=".activity.fitur.proyektor.ProyektorActivity"
             android:exported="false" />
         <activity
             android:name=".activity.nav.DashboardActivity"

@@ -1,4 +1,4 @@
-package com.example.proyektorapp.fragment;
+package com.example.proyektorapp.activity.nav.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +16,7 @@ import com.example.proyektorapp.R;
 import com.example.proyektorapp.api.ApiClient;
 import com.example.proyektorapp.api.service.RiwayatService;
 import com.example.proyektorapp.helper.SharedPrefsHelper;
-import com.example.proyektorapp.model.modelfitur.Riwayat;
+import com.example.proyektorapp.activity.fitur.riwayat.Riwayat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

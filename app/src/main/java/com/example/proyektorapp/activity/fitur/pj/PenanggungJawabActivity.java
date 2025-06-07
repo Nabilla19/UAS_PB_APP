@@ -1,4 +1,4 @@
-package com.example.proyektorapp.activity.fitur;
+package com.example.proyektorapp.activity.fitur.pj;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +11,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import com.example.proyektorapp.api.service.PJService;
-import com.example.proyektorapp.model.modelfitur.PJ;
 import com.example.proyektorapp.api.ApiClient;
 import com.example.proyektorapp.R;
 import com.example.proyektorapp.helper.SharedPrefsHelper;

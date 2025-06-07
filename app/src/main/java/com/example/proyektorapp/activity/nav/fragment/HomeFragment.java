@@ -1,4 +1,4 @@
-package com.example.proyektorapp.fragment;
+package com.example.proyektorapp.activity.nav.fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.proyektorapp.activity.fitur.PeminjamanActivity;
+import com.example.proyektorapp.activity.fitur.peminjaman.PeminjamanActivity;
 import com.example.proyektorapp.navcol.BottomNavColorProvider;
-import com.example.proyektorapp.activity.fitur.KegiatanActivity;
-import com.example.proyektorapp.activity.fitur.PenanggungJawabActivity;
-import com.example.proyektorapp.activity.fitur.ProyektorActivity;
+import com.example.proyektorapp.activity.fitur.kegiatan.KegiatanActivity;
+import com.example.proyektorapp.activity.fitur.pj.PenanggungJawabActivity;
+import com.example.proyektorapp.activity.fitur.proyektor.ProyektorActivity;
 import com.example.proyektorapp.R;
 
 public class HomeFragment extends Fragment implements BottomNavColorProvider {

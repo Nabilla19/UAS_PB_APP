@@ -1,4 +1,4 @@
-package com.example.proyektorapp.model.modelfitur;
+package com.example.proyektorapp.activity.fitur.kegiatan;
 
 import java.sql.Timestamp;
 

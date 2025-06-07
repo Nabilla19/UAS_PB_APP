@@ -1,8 +1,8 @@
 package com.example.proyektorapp.api;
 
-import com.example.proyektorapp.model.LoginRequest;
-import com.example.proyektorapp.model.RegisterRequest;
-import com.example.proyektorapp.model.UserResponse;
+import com.example.proyektorapp.activity.auth.model.LoginRequest;
+import com.example.proyektorapp.activity.auth.model.RegisterRequest;
+import com.example.proyektorapp.activity.auth.model.UserResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

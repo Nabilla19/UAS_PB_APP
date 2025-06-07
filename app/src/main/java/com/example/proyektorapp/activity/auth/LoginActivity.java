@@ -14,8 +14,8 @@ import com.example.proyektorapp.R;
 import com.example.proyektorapp.activity.nav.DashboardActivity;
 import com.example.proyektorapp.api.ApiClient;
 import com.example.proyektorapp.api.AuthService;
-import com.example.proyektorapp.model.LoginRequest;
-import com.example.proyektorapp.model.UserResponse;
+import com.example.proyektorapp.activity.auth.model.LoginRequest;
+import com.example.proyektorapp.activity.auth.model.UserResponse;
 import com.example.proyektorapp.helper.SharedPrefsHelper;
 
 

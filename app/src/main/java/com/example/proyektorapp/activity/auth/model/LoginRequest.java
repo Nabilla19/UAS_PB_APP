@@ -1,4 +1,4 @@
-package com.example.proyektorapp.model;
+package com.example.proyektorapp.activity.auth.model;
 
 public class LoginRequest {
     private String email;

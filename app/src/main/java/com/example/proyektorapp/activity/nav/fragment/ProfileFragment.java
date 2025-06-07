@@ -1,4 +1,4 @@
-package com.example.proyektorapp.fragment;
+package com.example.proyektorapp.activity.nav.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;

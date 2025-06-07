@@ -2,7 +2,7 @@ package com.example.proyektorapp.api.service;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.*;
-import com.example.proyektorapp.model.modelfitur.Proyektor;
+import com.example.proyektorapp.activity.fitur.proyektor.Proyektor;
 
 
 public interface ProyektorService {

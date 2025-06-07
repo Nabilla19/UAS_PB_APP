@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.proyektorapp.R;
-import com.example.proyektorapp.fragment.HistoryFragment;
-import com.example.proyektorapp.fragment.HomeFragment;
-import com.example.proyektorapp.fragment.ProfileFragment;
+import com.example.proyektorapp.activity.nav.fragment.HistoryFragment;
+import com.example.proyektorapp.activity.nav.fragment.HomeFragment;
+import com.example.proyektorapp.activity.nav.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {

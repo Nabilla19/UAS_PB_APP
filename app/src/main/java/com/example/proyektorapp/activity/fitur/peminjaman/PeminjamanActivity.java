@@ -1,4 +1,4 @@
-package com.example.proyektorapp.activity.fitur;
+package com.example.proyektorapp.activity.fitur.peminjaman;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import com.example.proyektorapp.R;
 import com.example.proyektorapp.api.ApiClient;
 import com.example.proyektorapp.api.service.PeminjamanService;
 import com.example.proyektorapp.helper.SharedPrefsHelper;
-import com.example.proyektorapp.model.modelfitur.Peminjaman;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 import retrofit2.Call;

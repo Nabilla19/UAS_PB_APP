@@ -1,4 +1,4 @@
-package com.example.proyektorapp.activity.fitur;
+package com.example.proyektorapp.activity.fitur.kegiatan;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,9 +10,8 @@ import com.example.proyektorapp.R;
 import com.example.proyektorapp.api.ApiClient;
 import com.example.proyektorapp.api.service.KegiatanService;
 import com.example.proyektorapp.helper.SharedPrefsHelper;
-import com.example.proyektorapp.model.modelfitur.Kegiatan;
+
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import retrofit2.Call;
