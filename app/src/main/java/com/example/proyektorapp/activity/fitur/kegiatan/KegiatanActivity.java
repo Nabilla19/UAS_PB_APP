@@ -8,7 +8,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.proyektorapp.R;
 import com.example.proyektorapp.api.ApiClient;
-import com.example.proyektorapp.api.service.KegiatanService;
+import com.example.proyektorapp.api.service.kegiatan.KegiatanService;
 import com.example.proyektorapp.helper.SharedPrefsHelper;
 
 import java.text.SimpleDateFormat;

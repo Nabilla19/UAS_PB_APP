@@ -11,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import com.example.proyektorapp.api.ApiClient;
-import com.example.proyektorapp.api.service.ProyektorService;
+import com.example.proyektorapp.api.service.proyektor.ProyektorService;
 import com.example.proyektorapp.R;
 import com.example.proyektorapp.helper.SharedPrefsHelper;
 

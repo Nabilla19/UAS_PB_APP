@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyektorapp.R;
 import com.example.proyektorapp.api.ApiClient;
-import com.example.proyektorapp.api.AuthService;
+import com.example.proyektorapp.api.service.auth.AuthService;
 import com.example.proyektorapp.activity.auth.model.RegisterRequest;
 import com.example.proyektorapp.activity.auth.model.UserResponse;
 

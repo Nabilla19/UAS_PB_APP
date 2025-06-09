@@ -9,7 +9,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.proyektorapp.R;
 import com.example.proyektorapp.api.ApiClient;
-import com.example.proyektorapp.api.service.PeminjamanService;
+import com.example.proyektorapp.api.service.Peminjaman.PeminjamanService;
 import com.example.proyektorapp.helper.SharedPrefsHelper;
 
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.example.proyektorapp.api;
+package com.example.proyektorapp.api.service.auth;
 
 import com.example.proyektorapp.activity.auth.model.LoginRequest;
 import com.example.proyektorapp.activity.auth.model.RegisterRequest;

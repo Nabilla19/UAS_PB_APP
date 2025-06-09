@@ -10,7 +10,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import com.example.proyektorapp.api.service.PJService;
+import com.example.proyektorapp.api.service.pj.PJService;
 import com.example.proyektorapp.api.ApiClient;
 import com.example.proyektorapp.R;
 import com.example.proyektorapp.helper.SharedPrefsHelper;
@@ -161,9 +161,9 @@ private void addPJview(PJ p) {
     Button btnEdit = itemView.findViewById(R.id.btnEdit);
     Button btnDelete = itemView.findViewById(R.id.btnDelete);
 
-    tvnik.setText("Kode: " + p.getnik());
-    tvnamaPJ.setText("Merek: " + p.getnama());
-    tvNoHP.setText("No Seri: " + p.getNo_hp());
+    tvnik.setText("NIK: " + p.getnik());
+    tvnamaPJ.setText("Nama: " + p.getnama());
+    tvNoHP.setText("No Hp: " + p.getNo_hp());
 
 
     if (isAdmin) {

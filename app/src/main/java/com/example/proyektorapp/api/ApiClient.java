@@ -43,7 +43,7 @@ public class ApiClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.2.30.7:3001/") // ganti sesuai URL API kamu
+                    .baseUrl("http://192.168.188.43:3001/") // ganti sesuai URL API kamu
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
